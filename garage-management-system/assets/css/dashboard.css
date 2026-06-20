@@ -1,0 +1,133 @@
+.dashboard-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    width: 100%;
+    align-items: flex-start;
+}
+
+
+.dashboard-left {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    width: 100%;
+}
+
+.dashboard-right {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    margin-top: 40px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    width: 150%;
+    border-radius: 50px;
+    margin-top: 1px;
+}
+
+.stat-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    min-height: 140px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.parkings-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    width: 150%;
+    border-radius: 50px;
+}
+
+.parking-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+    min-height: 220px;
+    width: 100%;
+}
+.parking-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.occupied {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.available {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.parking-body {
+    padding: 15px;
+}
+
+.data-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.chart-card {
+    height: 400px;   /* KEY FIX */
+    overflow: hidden;
+    position: relative;
+}
+
+.chart-card canvas {
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.appointments-card {
+height: 400px;
+    overflow-y: auto;
+}
+
+.appointment-list {
+    list-style: none;
+    padding: 0;
+}
+
+.appointment-list li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}

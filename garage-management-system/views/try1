@@ -1,0 +1,30 @@
+ <section class="vehicle-details-card">
+                       <div class="form-group">
+                           <label for="chassis"> Chassis Number <span class="required"></span>
+                           </label>
+
+                          <input type="text"
+                                 id="chassis"
+                                  name="chassis"
+                                 maxlength="17"
+                                 placeholder="e.g. 1FTFW1ED5HFA12345"
+                              required
+                            >
+                       </div>
+                   </section>
+                   516
+                   
+
+    .gms-panel-title-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        gap: 160px;
+    }
+    .gms-panel-heading {
+        font-size: 15px;
+        font-weight: 700;
+        color: #1f2937;
+        margin: 0;
+    }

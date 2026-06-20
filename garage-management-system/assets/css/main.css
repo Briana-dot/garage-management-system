@@ -1,0 +1,927 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #e1e5e8; /* Soft off-white backdrop visible in image */
+}
+
+.main-content {
+    margin-left: 240px;
+    margin-top: 7px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 24px;
+    align-items: start;
+}
+
+/* Page Headers */
+.page-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #00040b;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 15px 0;
+}
+
+
+.section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 32px 0 20px 0;
+    letter-spacing: 0.5px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.stat-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.stat-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #64748b;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 8px;
+}
+
+.stat-footer {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.parkings-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.parking-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.parking-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed #e2e8f0;
+    padding-bottom: 12px;
+}
+
+.parking-header h3 {
+    font-size: 16px;
+    color: #0f172a;
+}
+
+/* Status Badges */
+.status-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    text-transform: uppercase;
+}
+
+.status-badge.occupied {
+    background-color: #fee2e2;
+    color: #ef4444;
+}
+
+.status-badge.available {
+    background-color: #dcfce7;
+    color: #22c55e;
+}
+
+/* Internal Data Rows */
+.parking-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.data-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 13px;
+}
+
+.data-row span {
+    color: #64748b;
+}
+
+.data-row strong {
+    color: #1e293b;
+    text-align: right;
+}
+
+.parking-footer {
+    margin-top: 16px;
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.dashboard-right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: sticky;
+    top: 95px;
+}
+
+.chart-card, .appointments-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 24px;
+}
+
+/* Appointment Row Items styling layout */
+.appointment-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.appointment-item:last-child {
+    border-bottom: none;
+}
+
+/* ==================== TOPBAR LAYER ==================== */
+.topbar {
+    height: 75px;
+    background: #000000;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.topbar * {
+    color: white;
+}
+
+.brand-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-logo {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}
+
+.brand-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.notifications-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.notification-btn {
+    position: relative;
+    background: transparent;
+    border: none;
+    color: #475569; /* Slate gray bell color to match the GMS UI */
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s;
+}
+
+.notification-btn:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+/* Precise Red Notification Dot Overlay */
+.notification-badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background-color: #ef4444; /* Modern visual red */
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff; /* Smooth visual separation mask */
+}
+
+/* Menu popup list styling hidden by default */
+.notifications-dropdown {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 260px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.notifications-dropdown.show {
+    display: flex;
+}
+
+.dropdown-header {
+    padding: 12px 16px;
+    font-weight: 600;
+    font-size: 13px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #0f172a;
+    background: #f8fafc;
+}
+
+.dropdown-item {
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #334155;
+    border-bottom: 1px solid #f1f5f9;
+    cursor: pointer;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background: #f8fafc;
+}
+
+
+.profile-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.profile-image {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.1);
+    display: block;
+}
+
+.profile-name {
+    font-size: 14px;
+}
+
+.profile-toggle {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* ==================== SIDEBAR LAYER ==================== */
+.sidebar {
+    width: 240px;
+    height: calc(100vh - 75px);
+    background: #ffffff;
+    border-right: 1px solid #e5e7eb;
+    position: fixed;
+    top: 75px;
+    left: 0;
+    overflow-y: auto;
+}
+
+.sidebar-menu {
+    list-style: none;
+    margin: 0;
+    padding: 20px 0;
+}
+
+.sidebar-menu li {
+    margin-bottom: 8px;
+    padding: 0 12px;
+}
+
+.sidebar-menu li a {
+    height: 52px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    color:  #000000;
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+.sidebar-menu li a:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+.sidebar-menu li.active a {
+    background: #808080;
+    color: white;
+}
+
+.menu-text {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* Keep it hidden by default */
+.profile-dropdown {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    width: 160px;
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    
+    /* Crucial lines for hiding/showing */
+    display: none; 
+    flex-direction: column;
+}
+
+/* This class will be added/removed by JavaScript */
+.profile-dropdown.show {
+    display: flex;
+}
+
+.footer {
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    padding: 15px 20px;
+    margin-top: 30px;
+    margin-left: 240px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.footer-content p {
+    margin: 0;
+    font-size: 15px;
+    color: #6b7280;
+}
+
+ /* Scope styling rules safely inside the wrapper module context container */
+    .gms-vehicles-wrapper {
+        padding: 24px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background-color: #ffffff;
+        min-height: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Core Section Typography Elements */
+    .gms-section-header {
+        margin-bottom: 24px;
+    }
+    .gms-section-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #111827;
+        text-transform: uppercase;
+        letter-spacing: -0.025em;
+        margin: 0;
+    }
+
+    /* 1. Quick Operations Action Cards Strip Array Ribbon Layout Components */
+    .gms-action-ribbon {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 95px;
+    margin-bottom: 45px;
+    overflow-x: auto;
+}
+
+.gms-action-card {
+    min-width: 140px;
+    height: 90px;
+
+    background: #ffffff;
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-decoration: none;
+    color: #1f2937;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.gms-action-card i {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.gms-action-card span {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+    /* 2. Workspace Two-Column Dynamic Split Layout Matrix Rules */
+    .gms-split-workspace {
+        display: grid;
+        grid-template-columns: 75% 25%;
+        gap: 12px;
+        align-items: start;
+        margin-top: -10px;
+    }
+    @media (max-width: 1024px) {
+        .gms-split-workspace {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* 3. Panel Container Shell Blocks Structure Mapping */
+    .gms-panel-box {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+    /* 4. Table Filter Search Component Control Layout Rules */
+    .gms-search-container {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        margin-bottom: 12px;
+    }
+    .gms-search-field {
+        width: 100%;
+        max-width: 100px;
+        padding: 6px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 13px;
+        outline: none;
+        text-align: center;
+    }
+    .gms-search-field:focus {
+        border-color: #3b82f6;
+    }
+
+    .gms-table-footer {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;           
+    width: 100%;                
+    padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
+}
+
+
+    /* 5. Responsive Data Table Engine Declarations */
+    .gms-table-scroller {
+        overflow-x: auto;
+        width: 100%;
+    }
+    .gms-data-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+        font-size: 13px;
+    }
+    .gms-data-table th {
+        background: #f9fafb;
+        padding: 8px;
+        font-weight: 600;
+        color: #4b5563;
+        border-bottom: 1px solid #e5e7eb;
+        white-space: nowrap;
+    }
+    .gms-data-table td {
+        padding: 10px 12px;
+        border-bottom: 1px solid #f3f4f6;
+        color: #111827;
+        vertical-align: middle;
+    }
+    .gms-data-table tbody tr:hover {
+        background-color: #f9fafb;
+    }
+    .gms-Chasis-badge {
+        font-family: monospace;
+        color: #4b5563;
+        font-size: 12px;
+    }
+
+    /* 6. Dynamic Colored Badge Status Mapping Elements */
+    .gms-status-badge {
+        display: inline-block;
+        padding: 4px 8px;
+        font-size: 11px;
+        font-weight: 500;
+        border-radius: 4px;
+    }
+    .status-lbl-customer-name { background: #f3f4f6; color: #374151; }
+    .status-lbl-completed { background: #e8f5e9; color: #2e7d32; }
+    .status-lbl-in-repair { background: #fffde7; color: #f57f17; }
+    .status-lbl-in-repair-completed { background: #e1f5fe; color: #0277bd; }
+
+    /* 7. Sidebar Chronological Activity Node Timeline Stream Components */
+    .gms-activity-feed {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .gms-activity-node {
+        border-left: 2px solid #374151;
+        padding-left: 12px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+    .gms-node-title {
+        font-size: 12px;
+        font-weight: 700;
+        color: #2f3031;
+        margin: 0 0 2px 0;
+    }
+    .gms-node-desc {
+        font-size: 12px;
+        color: #4b5563;
+        margin: 0 0 4px 0;
+        line-height: 1.4;
+    }
+    .gms-node-time {
+        font-size: 11px;
+        color: #9ca3af;
+        font-family: monospace;
+    }
+
+/* Sidebar Header Typography Styling Rule Adjustment */
+.gms-activity-title {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 12px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Timeline Activity Matrix Feed Scroll Box Area Parameter Constraints */
+.gms-activity-feed-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;      
+    overflow-y: auto;         
+    padding-right: 4px;
+}
+
+/* Timeline Item Element Flex Alignment Layout Matrix */
+.gms-activity-row {
+    display: flex;
+    align-items: flex-start;  
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed #e5e7eb; 
+}
+
+.gms-activity-row:last-child {
+    border-bottom: none;       
+}
+
+/* Fixed Dimension Visual Vector Icon Alignment Slot */
+.gms-activity-icon-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    flex-shrink: 0;            
+    font-size: 14px;
+}
+
+/* Icon Context Mapping Accent Color Assignment Tokens */
+.status-color-payment {
+    background-color: #fef3c7; 
+    color: #d97706;            
+}
+
+.status-color-service {
+    background-color: #e0f2fe; 
+    color: #0284c7;           
+}
+
+/* Timeline Text Field Column Flexbox Box Parent Rules */
+.gms-activity-details-slot {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Status Bracket Badge Element Presentation Rule Context */
+.gms-activity-badge {
+    font-family: monospace;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.label-payment { color: #b45309; }
+.label-service { color: #0369a1; }
+
+/* Context Paragraph Text Layout Styling Boundaries */
+.gms-activity-desc {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 12px;
+    color: #0b64e0;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.gms-step-banner {
+  /* System Design Tokens */
+  --gms-font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --gms-blue-primary: #0284c7;
+  --gms-text-dark: #0f172a;
+  --gms-text-muted: #0a0a0a;
+  
+  font-family: var(--gms-font-stack);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+    max-width: 1100px;
+  padding-bottom: 24px;
+  padding-right: 30px;
+  border-bottom: 2px solid var(--gms-border-color);
+  background-color: transparent;
+}
+
+/* Header Text Styles */
+.banner-main-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--gms-text-dark);
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+/* Horizontal Flow Progress Alignment */
+.banner-progress-flow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Step Circle Base Setup */
+.progress-node {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Active Step Variant */
+.progress-node.node-active {
+  background-color: var(--gms-blue-primary);
+  border: 2px solid var(--gms-blue-primary);
+  color: #ffffff;
+}
+
+/* Inactive Step Variant */
+.progress-node.node-inactive {
+  background-color: #ffffff;
+  border: 2px solid var(--gms-border-color);
+  color: var(--gms-text-muted);
+}
+
+/* Connecting Line Between Steps */
+.progress-line {
+  width: 40px;
+  height: 2px;
+  background:#898d94;
+}
+
+.progress-line.line-inactive {
+  background-color: var(--gms-border-color);
+}
+
+/* Responsive Adaptive Viewport Rule */
+@media (max-width: 768px) {
+  .gms-step-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+.vehicle-details-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    margin: 0 auto 24px auto;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    width: 100%;
+     position: relative;
+    margin-top: 5px;
+}
+.required {
+    color: #dc2626;
+}
+.form-group input {
+    width: 100%;
+    height: 35px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #111827;
+    background: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+}
+.form-group input,
+.form-group select {
+    height: 44px;
+    padding: 0 12px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+
+    font-size: 14px;
+    color: #111827;
+
+    background: #ffffff;
+
+    transition: 0.2s ease;
+}
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+.full-width {
+    grid-column: 1 / -1;
+}
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.btn-primary {
+    background: #2563eb;
+    color: #fff;
+
+    padding: 10px 18px;
+    border: none;
+    border-radius: 10px;
+
+    font-weight: 600;
+    cursor: pointer;
+}
+.btn-secondary {
+    background: #e5e7eb;
+    color: #6b7280;
+
+    padding: 10px 18px;
+    border: none;
+    border-radius: 10px;
+
+    font-weight: 600;
+    cursor: not-allowed;
+}
+
+.gms-pagination-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.gms-paginate-btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Previous Button */
+.btn-prev {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-prev:hover:not(:disabled) {
+    background: #5a6268;
+}
+
+/* Next Button */
+.btn-next {
+    background: #0d6efd;
+    color: white;
+}
+
+.btn-next:hover {
+    background: #0b5ed7;
+}
+
+/* Disabled State */
+.gms-paginate-btn:disabled {
+    background: #d1d5db;
+    color: #6b7280;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
