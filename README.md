@@ -23,7 +23,7 @@ The system is designed to streamline garage and workshop operations including ve
 
 ### Vehicle Management
 
-![Vehicle Management](screenshots/vehicles.png)
+![Vehicle-Management](screenshots/vehicles.png)
 
 ---
 
