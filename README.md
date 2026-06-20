@@ -1,3 +1,4 @@
+![Garage Management System](screenshots/banner.png)
 # Garage Management System
 
 Version: v0.3 Beta
